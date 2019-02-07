@@ -588,6 +588,10 @@ class CategoryTree {
 			$label = $title->getPrefixedText();
 		}
 
+		$fullname = $label;
+		$split = explode( '/', $fullname );
+		$label = $split[count( $split ) - 1];
+
 		$labelClass = 'CategoryTreeLabel ' . ' CategoryTreeLabelNs' . $ns;
 
 		if ( !$title->getArticleID() ) {
@@ -658,7 +662,7 @@ class CategoryTree {
 		}
 		$s .= Xml::tags( 'span', $attr, $bullet ) . ' ';
 
-		$s .= Xml::element( 'a', [ 'class' => $labelClass, 'href' => $wikiLink ], $label );
+		$s .= Xml::element( 'a', [ 'class' => $labelClass, 'href' => $wikiLink, 'title' => $fullname ], $label );
 
 		if ( $count !== false && $this->getOption( 'showcount' ) ) {
 			$s .= self::createCountString( RequestContext::getMain(), $cat, $count );
