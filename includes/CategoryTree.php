@@ -517,7 +517,7 @@ class CategoryTree {
 			$t = Title::newFromRow( $row );
 
 			$label = $t->getText();
-
+		
 			$wikiLink = $special->getLocalURL( 'target=' . $t->getPartialURL() .
 				'&' . $this->getOptionsAsUrlParameters() );
 
@@ -587,6 +587,10 @@ class CategoryTree {
 		} else {
 			$label = $title->getPrefixedText();
 		}
+
+		$fullname = $label;
+		$split = explode( '/', $fullname );
+		$label = $split[count( $split ) - 1];
 
 		$labelClass = 'CategoryTreeLabel ' . ' CategoryTreeLabelNs' . $ns;
 
@@ -658,7 +662,7 @@ class CategoryTree {
 		}
 		$s .= Xml::tags( 'span', $attr, $bullet ) . ' ';
 
-		$s .= Xml::element( 'a', [ 'class' => $labelClass, 'href' => $wikiLink ], $label );
+		$s .= Xml::element( 'a', [ 'class' => $labelClass, 'href' => $wikiLink, 'title' => $fullname ], $label );
 
 		if ( $count !== false && $this->getOption( 'showcount' ) ) {
 			$s .= self::createCountString( RequestContext::getMain(), $cat, $count );
