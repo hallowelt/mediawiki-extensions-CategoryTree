@@ -517,7 +517,7 @@ class CategoryTree {
 			$t = Title::newFromRow( $row );
 
 			$label = $t->getText();
-
+		
 			$wikiLink = $special->getLocalURL( 'target=' . $t->getPartialURL() .
 				'&' . $this->getOptionsAsUrlParameters() );
 
